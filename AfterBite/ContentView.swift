@@ -29,7 +29,7 @@ struct ContentView: View {
     var body: some View {
         TimelineView(.animation) { timeline in
             let elapsedTime = timeline.date.timeIntervalSinceReferenceDate
-            let waveOffset = elapsedTime * 0.5 // 느리게
+            let waveOffset = elapsedTime * 1.2
 
             ZStack {
                 // 검은 배경
@@ -102,14 +102,14 @@ struct WaveView: View {
 
             ZStack {
                 // 뒤쪽 물결
-                WaveShape(offset: waveOffset * 0.7, waveHeight: 20)
+                WaveShape(offset: waveOffset * 0.8, waveHeight: 4)
                     .fill(waveColor.opacity(0.6))
-                    .offset(y: baseY + sin(waveOffset * 0.5) * 10)
+                    .offset(y: baseY + sin(waveOffset * 0.7) * 2)
 
                 // 앞쪽 물결
-                WaveShape(offset: -waveOffset, waveHeight: 25)
+                WaveShape(offset: -waveOffset, waveHeight: 5)
                     .fill(waveColor)
-                    .offset(y: baseY + sin(waveOffset * 0.8) * 8)
+                    .offset(y: baseY + sin(waveOffset) * 2)
             }
         }
     }
