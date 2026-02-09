@@ -27,39 +27,45 @@ struct ContentView: View {
     private let timerSize: CGFloat = 250
 
     var body: some View {
-        TimelineView(.animation) { timeline in
-            let elapsedTime = timeline.date.timeIntervalSinceReferenceDate
-            let waveOffset = elapsedTime * 1.2
+        ZStack {
+            // 검은 배경
+            Color.black
+                .ignoresSafeArea()
 
+            // 원형 타이머
             ZStack {
-                // 검은 배경
-                Color.black
-                    .ignoresSafeArea()
+                // 원 안의 물
+                WaterFillView(
+                    waterLevel: waterLevel,
+                    waterColor: Color(hex: "00ff94")
+                )
+                .frame(width: timerSize, height: timerSize)
+                .clipShape(Circle())
 
-                // 원형 타이머
-                ZStack {
-                    // 원 안의 물결
-                    WaveView(
-                        waveOffset: waveOffset,
-                        waterLevel: waterLevel,
-                        waveColor: Color(hex: "00ff94")
-                    )
+                // 테두리
+                Circle()
+                    .stroke(Color(hex: "00ff94").opacity(0.5), lineWidth: 3)
                     .frame(width: timerSize, height: timerSize)
-                    .clipShape(Circle())
 
-                    // 테두리
-                    Circle()
-                        .stroke(Color(hex: "00ff94").opacity(0.5), lineWidth: 3)
+                // 시간 텍스트 (흰색 - 물 없는 영역)
+                Text(formattedTime)
+                    .font(.system(size: 44, weight: .medium, design: .monospaced))
+                    .foregroundColor(.white)
+
+                // 시간 텍스트 (검은색 - 물 있는 영역)
+                Text(formattedTime)
+                    .font(.system(size: 44, weight: .medium, design: .monospaced))
+                    .foregroundColor(.black)
+                    .mask(
+                        WaterFillView(
+                            waterLevel: waterLevel,
+                            waterColor: .white
+                        )
                         .frame(width: timerSize, height: timerSize)
-
-                    // 시간 텍스트
-                    Text(formattedTime)
-                        .font(.system(size: 44, weight: .medium, design: .monospaced))
-                        .foregroundColor(.white)
-                }
-                .onTapGesture {
-                    toggleTimer()
-                }
+                    )
+            }
+            .onTapGesture {
+                toggleTimer()
             }
         }
         .onDisappear {
@@ -90,53 +96,18 @@ struct ContentView: View {
     }
 }
 
-// MARK: - Wave View
-struct WaveView: View {
-    var waveOffset: CGFloat
+// MARK: - Water Fill View
+struct WaterFillView: View {
     var waterLevel: CGFloat
-    var waveColor: Color
+    var waterColor: Color
 
     var body: some View {
         GeometryReader { geometry in
-            let baseY = geometry.size.height * (1 - waterLevel)
-
-            ZStack {
-                // 뒤쪽 물결
-                WaveShape(offset: waveOffset * 0.8, waveHeight: 4)
-                    .fill(waveColor.opacity(0.6))
-                    .offset(y: baseY + sin(waveOffset * 0.7) * 2)
-
-                // 앞쪽 물결
-                WaveShape(offset: -waveOffset, waveHeight: 5)
-                    .fill(waveColor)
-                    .offset(y: baseY + sin(waveOffset) * 2)
-            }
+            Rectangle()
+                .fill(waterColor)
+                .frame(width: geometry.size.width, height: geometry.size.height * waterLevel)
+                .offset(y: geometry.size.height * (1 - waterLevel))
         }
-    }
-}
-
-// MARK: - Wave Shape
-struct WaveShape: Shape {
-    var offset: CGFloat
-    var waveHeight: CGFloat
-
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let width = rect.width
-        let height = rect.height
-
-        path.move(to: CGPoint(x: 0, y: height))
-
-        for x in stride(from: 0, through: width, by: 2) {
-            let relativeX = x / width
-            let y = waveHeight + sin(relativeX * .pi * 2 + offset) * waveHeight
-            path.addLine(to: CGPoint(x: x, y: y))
-        }
-
-        path.addLine(to: CGPoint(x: width, y: height))
-        path.closeSubpath()
-
-        return path
     }
 }
 
