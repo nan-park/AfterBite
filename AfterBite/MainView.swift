@@ -41,10 +41,7 @@ struct MainView: View {
                     Spacer()
                 }
                 
-                // WalkView
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.grey90)
-                    .frame(height: 100)
+                WalkCard()
                 
                 Spacer()
                     .frame(height: 28)
@@ -63,10 +60,7 @@ struct MainView: View {
                         .frame(width: 16)
                 }
                 
-                // RecordView
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.grey90)
-                    .frame(height: 100)
+                RecordCard()
                 
                 Spacer()
             }
