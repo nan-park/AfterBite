@@ -31,15 +31,46 @@ struct MainView: View {
             Color.black
                 .ignoresSafeArea()
             
-            VStack(spacing: 0) {
-                RoundedRectangle(cornerRadius: 10)
-                    .fill(.primary)
-                    .frame(width: 100, height: 100)
+            VStack(spacing: 8) {
+                Spacer()
+                    .frame(height: 30)
                 
+                HStack {
+                    Text("Walk")
+                        .foregroundColor(.white)
+                    Spacer()
+                }
+                
+                // WalkView
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(.primaryGreen)
-                    .frame(width: 100, height: 100)
+                    .fill(.grey90)
+                    .frame(height: 100)
+                
+                Spacer()
+                    .frame(height: 28)
+                
+                HStack {
+                    Text("Record")
+                        .foregroundColor(.white)
+                    
+                    Spacer()
+                    
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 16))
+                        .foregroundStyle(.white)
+                    
+                    Spacer()
+                        .frame(width: 16)
+                }
+                
+                // RecordView
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(.grey90)
+                    .frame(height: 100)
+                
+                Spacer()
             }
+            .padding(.horizontal, 24)
         }
     }
 }
