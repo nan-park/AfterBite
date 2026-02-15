@@ -29,7 +29,7 @@ struct WalkCard: View {
                 // WalkView로 이동(확장 모션)
             } label: {
                 Text("Label")
-                    .font(.system(size: 16))
+                    .font(.label3)
                     .foregroundColor(.textBlack)
                     .frame(maxWidth: .infinity)
                     .frame(height: 44)

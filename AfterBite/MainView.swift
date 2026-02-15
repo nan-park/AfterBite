@@ -38,7 +38,7 @@ struct MainView: View {
                 HStack {
                     Text("Walk")
                         .foregroundColor(.textWhite)
-                        .font(.system(size: 24))
+                        .font(.label1)
                     Spacer()
                 }
                 
@@ -50,7 +50,7 @@ struct MainView: View {
                 HStack {
                     Text("Record")
                         .foregroundColor(.textWhite)
-                        .font(.system(size: 24))
+                        .font(.label1)
                     
                     Spacer()
                         .frame(width: 6)

@@ -10,8 +10,15 @@ import SwiftUI
 struct RecordCard: View {
     var body: some View {
         VStack {
-            Text("Record")
+            HStack {
+                Text("January")
+                    .font(.label2)
+                    .foregroundColor(.textWhite)
+                
+                Spacer()
+            }
         }
+        .padding(.horizontal, 37)
         .padding(.vertical, 32)
         .frame(maxWidth: .infinity)
         .background(.cardBackground)
