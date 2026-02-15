@@ -12,15 +12,15 @@ struct WalkCard: View {
         VStack {
             ZStack {
                 Circle()
-                    .foregroundColor(.primaryGreen)
-                    .frame(width: 206, height: 206)
+                    .foregroundColor(.disable)
+                    .frame(width: 220, height: 220)
                 
                 Circle()
-                    .foregroundColor(.grey90)
-                    .frame(width: 180)
+                    .foregroundColor(.cardBackground)
+                    .frame(width: 194)
                 
                 Text("10:00")
-                    .font(.system(size: 53, weight: .medium))
+                    .font(.system(size: 56, weight: .medium))
                     .foregroundColor(.white)
             }
             .padding(.vertical, 36)
@@ -28,20 +28,20 @@ struct WalkCard: View {
             Button {
                 // WalkView로 이동(확장 모션)
             } label: {
-                Text("Start")
+                Text("Label")
                     .font(.system(size: 16))
-                    .foregroundColor(.black)
+                    .foregroundColor(.textBlack)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 40)
-                    .background(.white)
+                    .frame(height: 44)
+                    .background(.primaryGreen)
                     .cornerRadius(19)
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 36)
             
         }
         .padding(.bottom, 20)
         .frame(maxWidth: .infinity)
-        .background(.grey90)
+        .background(.cardBackground)
         .cornerRadius(10)
     }
 }

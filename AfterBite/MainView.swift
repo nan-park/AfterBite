@@ -37,7 +37,8 @@ struct MainView: View {
                 
                 HStack {
                     Text("Walk")
-                        .foregroundColor(.white)
+                        .foregroundColor(.textWhite)
+                        .font(.system(size: 24))
                     Spacer()
                 }
                 
@@ -48,16 +49,17 @@ struct MainView: View {
                 
                 HStack {
                     Text("Record")
-                        .foregroundColor(.white)
+                        .foregroundColor(.textWhite)
+                        .font(.system(size: 24))
                     
                     Spacer()
+                        .frame(width: 6)
                     
                     Image(systemName: "chevron.right")
                         .font(.system(size: 16))
                         .foregroundStyle(.white)
                     
                     Spacer()
-                        .frame(width: 16)
                 }
                 
                 RecordCard()

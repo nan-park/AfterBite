@@ -12,9 +12,9 @@ struct RecordCard: View {
         VStack {
             Text("Record")
         }
-        .padding(.bottom, 20)
+        .padding(.vertical, 32)
         .frame(maxWidth: .infinity)
-        .background(.grey90)
+        .background(.cardBackground)
         .cornerRadius(10)
     }
 }
